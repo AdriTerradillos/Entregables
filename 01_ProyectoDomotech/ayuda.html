@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <link rel="stylesheet" href="ayuda.css">
+</head>
+<body>
+    <header>
+        <h1>Página de Ayuda</h1>
+    </header>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Escriba su mensaje......">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const chatBox = document.getElementById('chat-box');
+            const message = userInput.value.trim();
+            if (message) {
+                // Display user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user-message';
+                userMessage.textContent = `User: ${message}`;
+                chatBox.appendChild(userMessage);
+                // Simulate bot response
+                const botResponse = chatbotResponse(message);
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot-message';
+                botMessage.textContent = `Bot: ${botResponse}`;
+                chatBox.appendChild(botMessage);
+                // Scroll to the bottom
+                chatBox.scrollTop = chatBox.scrollHeight;
+                // Clear input
+                userInput.value = '';
+            }
+        }
+
+        function chatbotResponse(message) {
+            const responses = {
+                'hola': 'Hola! ¿En qué puedo ayudarte?',
+                'ayuda': 'Desde luego, estoy aquí para ayudarte! ¿En qué necesitas que te ayude??',
+                'adiós': 'Hasta pronto! ¡Que tengas un gran día!'
+                'reunión': 'Hasta pronto! ¡Que tengas un gran día!'
+               
+            };
+            message = message.toLowerCase();
+            return responses[message] || "Lo siento, no logro entender lo que dice.";
+        }
+    </script>
+</body>
+</html>
